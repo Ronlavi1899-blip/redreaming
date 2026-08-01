@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ברוך הבא - מסיוט לחלום</title>
+  <meta name="theme-color" content="#101425" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101425'/%3E%3Ctext x='16' y='24' font-size='20' text-anchor='middle' fill='%23b7a9ff'%3E%E2%97%8C%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ═══ META PIXEL - אותו Pixel ID כמו בדף הנחיתה ═══ -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4064369010530258');
+  fbq('track', 'PageView');
+
+  // ═══ Purchase יורה פעם אחת לכל רכישה ═══
+  // הדף מיועד לשמירה במועדפים - בלי המנעול הזה כל חזרה של קונה
+  // נספרת כמכירה נוספת ומרעילה את האופטימיזציה של הקמפיין.
+  (function () {
+    var qs  = window.location.search || '';
+    var key = 'ltas_purchase' + (qs ? '_' + qs : '');
+    var fired;
+    try { fired = window.localStorage.getItem(key); } catch (e) { fired = null; }
+    if (fired) return;
+    fbq('track', 'Purchase', {value: 247.00, currency: 'ILS'}, {eventID: key});
+    try { window.localStorage.setItem(key, '1'); } catch (e) {}
+  })();
+</script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=4064369010530258&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+  <div class="noise"></div>
+
+  <section class="thanks-hero">
+    <div class="doc-wrap">
+      <span class="thanks-ring">◌</span>
+      <h1>ברוך הבא.<br>הלילה הראשון שלך מתחיל הערב.</h1>
+      <p>
+        שלחתי לך גם מייל עם הקישור הזה כדי שיישמר אצלך. אם הוא לא הגיע תוך כמה דקות - תבדוק בקידומי מכירות ובספאם, ואם גם שם אין, פשוט תכתוב לי ואסדר.
+      </p>
+    </div>
+  </section>
+
+  <main class="doc-page" style="padding-top:70px;">
+    <div class="doc-wrap">
+
+      <h2>החומרים</h2>
+
+      <!-- ═══ שני קבצי האודיו עדיין # - להחליף אחרי ההקלטה ═══ -->
+      <div class="downloads">
+        <!-- ═══ נוצר אוטומטית ע"י sync-audio.py - לא לערוך ידנית ═══ -->
+        <a href="files/audio/001.mp3" class="dl-item is-core" download="מסיוט לחלום - לפני שמתחילים.mp3">
+          <span class="ic">◌</span>
+          <span><b>לפני שמתחילים</b><span>4 דקות · <strong>תשמע את זה ראשון.</strong> מה יש בתוכנית, איך עובדים איתה, ולמי היא לא מתאימה.</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/audio/00.mp3" class="dl-item is-core" download="מסיוט לחלום - הדרכה קולית לשכתוב.mp3">
+          <span class="ic">◌</span>
+          <span><b>ההדרכה הקולית לשכתוב</b><span>10 דקות · הלב של השיטה. מתחילים איתה בלילה 9.</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/workbook-male.pdf" class="dl-item" download="מסיוט לחלום - ספר תרגול (זכר).pdf">
+          <span class="ic">◈</span>
+          <span><b>ספר התרגול - גרסת זכר</b><span>PDF · 65 עמודים · 21 לילות</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/workbook-female.pdf" class="dl-item" download="מסיוט לחלום - ספר תרגול (נקבה).pdf">
+          <span class="ic">◈</span>
+          <span><b>ספר התרגול - גרסת נקבה</b><span>PDF · 65 עמודים · אותו תוכן, בלשון נקבה</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/journal.pdf" class="dl-item" download="מסיוט לחלום - יומן הלילה.pdf">
+          <span class="ic">✎</span>
+          <span><b>יומן הלילה + כרטיס השכתוב</b><span>PDF · 23 עמודים · <strong>זה מיועד להדפסה</strong></span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/audio/01.mp3" class="dl-item" download="מסיוט לחלום - לילה 1.mp3">
+          <span class="ic">▷</span>
+          <span><b>לילה 1</b><span>לילה 1 מתוך 21</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/audio/02.mp3" class="dl-item" download="מסיוט לחלום - לילה 2.mp3">
+          <span class="ic">▷</span>
+          <span><b>לילה 2</b><span>לילה 2 מתוך 21</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/audio/03.mp3" class="dl-item" download="מסיוט לחלום - לילה 3.mp3">
+          <span class="ic">▷</span>
+          <span><b>לילה 3</b><span>לילה 3 מתוך 21</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/audio/04.mp3" class="dl-item" download="מסיוט לחלום - לילה 4.mp3">
+          <span class="ic">▷</span>
+          <span><b>לילה 4</b><span>לילה 4 מתוך 21</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/audio/05.mp3" class="dl-item" download="מסיוט לחלום - לילה 5.mp3">
+          <span class="ic">▷</span>
+          <span><b>לילה 5</b><span>לילה 5 מתוך 21</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/audio/06.mp3" class="dl-item" download="מסיוט לחלום - לילה 6.mp3">
+          <span class="ic">▷</span>
+          <span><b>לילה 6</b><span>לילה 6 מתוך 21</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/audio/07.mp3" class="dl-item" download="מסיוט לחלום - לילה 7.mp3">
+          <span class="ic">▷</span>
+          <span><b>לילה 7</b><span>לילה 7 מתוך 21</span></span>
+          <span class="arrow">↓</span>
+        </a>
+        <a href="files/audio/08.mp3" class="dl-item" download="מסיוט לחלום - לילה 8.mp3">
+          <span class="ic">▷</span>
+          <span><b>לילה 8</b><span>ההקלטות של שאר הלילות נוספות כאן במהלך השבוע</span></span>
+          <span class="arrow">↓</span>
+        </a>
+      </div>
+
+      <div class="doc-box">
+        <p><strong>שמור את הדף הזה.</strong> הגישה לכל החיים ואין תפוגה - הכי פשוט להוסיף למועדפים או לשמור את המייל.</p>
+      </div>
+
+      <h2>מה לעשות ב־20 הדקות הקרובות</h2>
+
+      <div class="steps-list">
+        <div class="step-row">
+          <span class="n">1</span>
+          <div>
+            <b>הדפס את יומן הלילה ואת כרטיס השכתוב</b>
+            <p>אם אין מדפסת בבית - כל דוכן צילומים. זה שווה את הטרחה: כתיבה ביד עובדת אחרת מהקלדה, וזה לא עניין של סגנון אלא של קצב.</p>
+          </div>
+        </div>
+        <div class="step-row">
+          <span class="n">2</span>
+          <div>
+            <b>קרא את שני העמודים הראשונים בספר</b>
+            <p>״למי זה מתאים ולמי לא״ ו״איך עובדים עם הספר״. חמש דקות. אל תדלג על הראשון.</p>
+          </div>
+        </div>
+        <div class="step-row">
+          <span class="n">3</span>
+          <div>
+            <b>מלא הערב את עמוד לילה 1 ביומן</b>
+            <p>גם אם עוד לא קראת כלום. זו נקודת הייחוס שנמדוד ממנה בלילה 19, ואי אפשר לשחזר אותה אחר כך.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-box">
+        <h3 style="margin-top:0;">הכלל היחיד</h3>
+        <p>לילה אחד ביום. לא שניים.</p>
+        <p style="margin-bottom:0;">ושתדע מראש איך זה בנוי: <strong>שמונה הלילות הראשונים הם הכנה. מלילה 9 ואילך יש רק דבר אחד - השכתוב, כל יום.</strong> אם תקרא הכל ולא תעשה את השכתוב, לא יקרה כלום. אם תעשה רק את השכתוב ותדלג על חצי מהקריאה - עדיין תראה שינוי.</p>
+      </div>
+
+      <h2>ועוד שני דברים</h2>
+
+      <p><strong>אני קורא כל הודעה.</strong> אם משהו לא ברור, אם נתקעת באמצע, או אם הלך משהו טוב - תכתוב לי. אני עונה בעצמי.</p>
+
+      <div class="doc-box">
+        <p><strong>ווטסאפ:</strong> <a href="https://wa.me/972534306880">053-430-6880</a><br>
+        <strong>מייל:</strong> <a href="mailto:0534306880ron@gmail.com">0534306880ron@gmail.com</a></p>
+        <p style="margin-bottom:0;">אם בתוך 14 יום תחליט שזה לא בשבילך - תכתוב לאחד מהשניים ותקבל את הכסף בחזרה. בלי שאלות ובלי טופס.</p>
+      </div>
+
+      <p><strong>ובעוד שבועיים אשלח לך הודעה אחת</strong> ואשאל איך הולך. אני מבקש שתענה גם אם התשובה היא ״לא נגעתי בזה״ - זה עוזר לי לשפר את זה לאנשים הבאים.</p>
+
+      <div class="doc-box" style="border-inline-start-color:var(--gold);">
+        <p style="margin-bottom:0;"><strong>ואם באמצע זה נעשה כבד מדי - עצור.</strong> זה לא כישלון. בעמוד ״מתי לעצור ולפנות לאיש מקצוע״ שבסוף הספר יש רשימה. במצוקה מיידית: <strong>ער״ן 1201</strong>, 24 שעות, חינם ואנונימי.</p>
+      </div>
+
+      <div class="doc-foot">
+        <p style="font-size:19px;color:var(--lavender-strong);font-weight:700;margin-bottom:8px;">חלומות פז</p>
+        <p style="margin:0 0 10px;">
+          מסיוט לחלום · רון לביא · moonbrew ◌<br>
+          החומרים מיועדים לשימוש אישי בלבד.
+        </p>
+        <p style="margin:0 0 10px;">
+          התוכן מיועד לעבודה עצמית ואינו טיפול, אבחון או ייעוץ רפואי.
+        </p>
+        <p style="margin:0;">
+          <a href="terms.html">תקנון ותנאי שימוש</a> · <a href="privacy.html">מדיניות פרטיות</a>
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+  /* ── רשת ביטחון לקישורי ההורדה ──
+     כל עוד href הוא "#", לחיצה לא עושה כלום והקונה חושב שהמוצר שבור.
+     עד שהקישורים ימולאו: הודעה ברורה במקום קליק מת.
+     אחרי שכל חמשת הקישורים אמיתיים - הקוד הזה לא עושה כלום.  */
+  (function () {
+    var pending = document.querySelectorAll('.dl-item[href="#"]');
+    if (!pending.length) return;
+
+    console.warn(
+      '⚠️ מסיוט לחלום: ' + pending.length + ' מתוך 5 קישורי ההורדה עדיין ריקים.\n' +
+      'לפתוח start.html ולהחליף כל href="#" בקישור אמיתי.'
+    );
+
+    pending.forEach(function (el) {
+      el.addEventListener('click', function (event) {
+        event.preventDefault();
+        alert('הקובץ הזה עדיין בהעלאה ויהיה כאן בקרוב.\n\nאם אתה צריך אותו עכשיו - תכתוב לי בווטסאפ ואשלח ידנית.');
+      });
+    });
+  })();
+  </script>
+</body>
+</html>
