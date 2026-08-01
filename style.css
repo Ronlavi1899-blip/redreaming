@@ -1293,3 +1293,20 @@ footer { padding: 52px 0 90px; background: #0d1020; color: #fff; }
   color:rgba(233,237,239,.55); direction:ltr; }
 .wa-shot cite{ display:block; font-style:normal; font-size:13px; opacity:.6;
   margin-top:10px; text-align:center; }
+
+/* שוט המוצר */
+.product-shot{ margin:30px 0 6px; border-radius:20px; overflow:hidden;
+  box-shadow:0 30px 70px rgba(21,24,39,.24), 0 4px 12px rgba(21,24,39,.1); }
+.product-shot img{ width:100%; height:auto; display:block; }
+
+/* בלוק ״ואז אני קם״ עם תצלום */
+.wake-block.has-photo{ position:relative; overflow:hidden; border-radius:24px;
+  padding:56px 40px; isolation:isolate; }
+.wake-photo{ position:absolute; inset:0; z-index:-2; }
+.wake-photo img{ width:100%; height:100%; object-fit:cover; object-position:50% 38%; }
+.wake-block.has-photo::after{ content:''; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(180deg,rgba(9,12,24,.62),rgba(9,12,24,.88)); }
+.wake-block.has-photo .wake-line,
+.wake-block.has-photo p{ color:rgba(255,255,255,.9); }
+.wake-block.has-photo .wake-punch{ color:#fff !important; }
+@media (max-width:640px){ .wake-block.has-photo{ padding:44px 24px; } }
