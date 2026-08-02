@@ -35,6 +35,10 @@
   //  של PayPlus, ומטא לא תזהה שמדובר באותה רכישה.
   // ═══════════════════════════════════════════════════════════════
   (function () {
+    // ניקוי המנעול הישן. הוא היה קבוע לכל החיים, כך שביקור בודד
+    // בדף התודה חסם כל רכישה עתידית מאותו דפדפן - כולל רכישות אמיתיות.
+    try { window.localStorage.removeItem('mb_purchase_fired'); } catch (e) {}
+
     // הגעה מדף פנימי באתר אינה חזרה מתשלום.
     // שים לב שאנחנו *לא* דורשים referrer של PayPlus - הרבה שערי תשלום
     // מסתירים אותו, וזה היה גורם לנו לפספס רכישות אמיתיות.
@@ -42,21 +46,33 @@
       if (document.referrer && new URL(document.referrer).origin === window.location.origin) return;
     } catch (e) {}
 
-    var LOCK = 'mb_purchase_fired';
-    try { if (window.localStorage.getItem(LOCK)) return; } catch (e) {}
+    // ═══ השער האמיתי: אסימון הצ'קאאוט ═══
+    // script.js כותב אותו ברגע הלחיצה על כפתור הרכישה. referrer ריק
+    // אינו מבדיל בין חזרה מ-PayPlus לבין מישהו שהקליד את הכתובת,
+    // ולכן הוא לא יכול לשמש כשער. האסימון כן.
+    var KEY = 'mb_checkout';
+    var MAX_AGE_MS = 3 * 60 * 60 * 1000;   // אסימון ישן מזה = ביקור חוזר, לא רכישה
 
-    // מזהה ייחודי לכל ירי. מזהה קבוע היה גורם למטא לאחד
-    // את הרכישות של כל הקונים לאירוע אחד ולמחוק את השאר.
-    var eventId = 'web-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+    var token = null;
+    try { token = JSON.parse(window.localStorage.getItem(KEY) || 'null'); } catch (e) {}
+    if (!token || typeof token.id !== 'string' || typeof token.t !== 'number') return;
+
+    if (Date.now() - token.t > MAX_AGE_MS) {
+      try { window.localStorage.removeItem(KEY); } catch (e) {}
+      return;
+    }
+
+    // צורכים את האסימון *לפני* הירי, לא אחריו: אם המשתמש מרענן מיד,
+    // הוא כבר לא קיים ולא ניתן לירות פעמיים. המזהה נשמר מרגע הלחיצה,
+    // כך שגם ירי חוזר תיאורטי היה נושא את אותו eventID ומטא הייתה מאחדת.
+    try { window.localStorage.removeItem(KEY); } catch (e) {}
 
     fbq('track', 'Purchase', {
       value: 247.00,
       currency: 'ILS',
       content_name: 'מסיוט לחלום',
       content_type: 'product'
-    }, { eventID: eventId });
-
-    try { window.localStorage.setItem(LOCK, '1'); } catch (e) {}
+    }, { eventID: token.id });
   })();
 </script>
   <noscript><img height="1" width="1" style="display:none"

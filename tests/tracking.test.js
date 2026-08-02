@@ -153,30 +153,111 @@ test('3ג. חתימה שגויה נדחית', async () => {
 
 /* ── דף התודה הזמני: Purchase מהדפדפן עד ש-CAPI עולה ── */
 
-test('3ד. thank-you.html יורה Purchase אחד, עם 247/ILS ומזהה ייחודי', () => {
+/**
+ * מריץ את בלוק ה-Purchase האמיתי מתוך thank-you.html מול DOM מדומה.
+ *
+ * הבדיקות הקודמות רק חיפשו מחרוזות ב-HTML, ולכן פספסו באג אמיתי:
+ * פתיחה ישירה של הדף ירתה Purchase והדליקה מנעול קבוע שחסם אחר כך
+ * כל רכישה אמיתית מאותו דפדפן. מכאן ואילך בודקים התנהגות, לא טקסט.
+ */
+function runThankYou({ referrer = '', storage = {}, now = 1785000000000 } = {}) {
   const html = readFileSync(join(ROOT, 'thank-you.html'), 'utf8');
+  const start = html.indexOf('(function () {');
+  const end = html.indexOf('})();', start);
+  assert.ok(start > -1 && end > start, 'בלוק ה-Purchase לא נמצא בדף');
 
-  assert.ok(/fbq\('track', 'Purchase'/.test(html), 'Purchase קיים');
-  assert.ok(/value: 247\.00/.test(html) && /currency: 'ILS'/.test(html), '247 ו-ILS');
-  assert.ok(/name="robots"\s+content="noindex/.test(html), 'noindex');
+  const store = { ...storage };
+  const fired = [];
+  const win = {
+    location: { origin: 'https://redreaming.netlify.app' },
+    localStorage: {
+      getItem: (k) => (k in store ? store[k] : null),
+      setItem: (k, v) => { store[k] = String(v); },
+      removeItem: (k) => { delete store[k]; },
+    },
+  };
+  const fbq = (...args) => { if (args[1] === 'Purchase') fired.push(args); };
+  const FrozenDate = class extends Date { static now() { return now; } };
 
-  // המנעול מונע ירי חוזר, והמזהה חייב להיות אקראי ולא קבוע
-  assert.ok(/localStorage\.getItem\(LOCK\)/.test(html), 'מנעול נגד ירי חוזר');
-  assert.ok(/Math\.random\(\)/.test(html), 'eventID אקראי - מזהה קבוע היה מאחד קונים');
-  assert.ok(/eventID: eventId/.test(html), 'eventID מועבר למטא');
+  new Function('window', 'document', 'fbq', 'Date', html.slice(start, end + 5))(
+    win, { referrer }, fbq, FrozenDate
+  );
 
-  // תזכורת למחיקה כשה-CAPI יעלה - אחרת ספירה כפולה
-  assert.ok(/למחוק ברגע ש-CAPI עולה/.test(html), 'אזהרת הזמניות קיימת בקוד');
+  return { fired, store, params: fired[0]?.[2], opts: fired[0]?.[3] };
+}
 
-  // הדף לא מכיל את המוצר - זה מה שמוריד את סיכון השיתוף
-  assert.ok(!/files\/audio|workbook|\.pdf/.test(html),
-    'קבצי המוצר נשארים ב-start.html בלבד');
+const PAYPLUS = 'https://payments.payplus.co.il/';
+const NOW_MS = 1785000000000;
+const token = (age = 0, id = 'web-test-abc123') =>
+  ({ mb_checkout: JSON.stringify({ t: NOW_MS - age, id }) });
+
+test('3ד. חזרה מ-PayPlus אחרי צ׳קאאוט → Purchase אחד עם 247/ILS ו-eventID', () => {
+  const { fired, params, opts } = runThankYou({ referrer: PAYPLUS, storage: token() });
+
+  assert.equal(fired.length, 1, 'Purchase נורה בדיוק פעם אחת');
+  assert.equal(params.value, 247.00);
+  assert.equal(params.currency, 'ILS');
+  assert.equal(opts.eventID, 'web-test-abc123', 'eventID מגיע מאסימון הצ׳קאאוט');
 });
 
-test('3ה. הגעה מדף פנימי לא יורה Purchase', () => {
+test('3ד2. גם בלי referrer (שער תשלום שמסתיר אותו) הרכישה נספרת', () => {
+  const { fired } = runThankYou({ referrer: '', storage: token() });
+  assert.equal(fired.length, 1, 'referrer ריק אינו סיבה לפספס רכישה אמיתית');
+});
+
+test('3ה. הגעה מדף פנימי באתר לא יורה Purchase', () => {
+  const { fired } = runThankYou({
+    referrer: 'https://redreaming.netlify.app/index.html',
+    storage: token(),
+  });
+  assert.equal(fired.length, 0);
+});
+
+test('3ו. פתיחה ישירה של /thank-you בלי צ׳קאאוט לא יורה Purchase', () => {
+  const { fired } = runThankYou({ referrer: '', storage: {} });
+  assert.equal(fired.length, 0, 'בלי אסימון אין הוכחת תשלום - ורכישה מזויפת מרעילה את הקמפיין');
+});
+
+test('3ז. רענון אחרי ירי לא יורה Purchase שני', () => {
+  const first = runThankYou({ referrer: PAYPLUS, storage: token() });
+  assert.equal(first.fired.length, 1);
+
+  // אותו דפדפן, אותו storage אחרי הירי הראשון
+  const second = runThankYou({ referrer: PAYPLUS, storage: first.store });
+  assert.equal(second.fired.length, 0, 'האסימון נצרך, ורענון לא מוסיף רכישה');
+});
+
+test('3ח. אסימון ישן מ-3 שעות לא יורה - זה ביקור חוזר, לא רכישה', () => {
+  const { fired, store } = runThankYou({
+    referrer: PAYPLUS,
+    storage: token(4 * 60 * 60 * 1000),
+  });
+  assert.equal(fired.length, 0);
+  assert.ok(!('mb_checkout' in store), 'האסימון הישן נמחק ולא נשאר להטריד');
+});
+
+test('3ט. המנעול הישן mb_purchase_fired לא חוסם רכישה אמיתית', () => {
+  const { fired, store } = runThankYou({
+    referrer: PAYPLUS,
+    storage: { ...token(), mb_purchase_fired: '1' },
+  });
+  assert.equal(fired.length, 1, 'זה בדיוק הבאג שהפיל את הרכישה האמיתית של 2.8');
+  assert.ok(!('mb_purchase_fired' in store), 'המנעול הישן מנוקה מהדפדפן');
+});
+
+test('3י. script.js מנפיק את האסימון בלחיצה על הצ׳קאאוט', () => {
+  const js = readFileSync(join(ROOT, 'script.js'), 'utf8');
+  assert.ok(/localStorage\.setItem\(\s*\n?\s*["']mb_checkout["']/.test(js),
+    'בלי הנפקה בצד הכפתור, דף התודה לעולם לא יירה');
+  assert.ok(/InitiateCheckout/.test(js), 'ההנפקה יושבת ליד ה-InitiateCheckout');
+});
+
+test('3כ. דף התודה נשאר נקי ממוצר ומאינדוקס', () => {
   const html = readFileSync(join(ROOT, 'thank-you.html'), 'utf8');
-  assert.ok(/document\.referrer/.test(html) && /=== window\.location\.origin\) return/.test(html),
-    'referrer מאותו origin חוסם את הירי');
+  assert.ok(/name="robots"\s+content="noindex/.test(html), 'noindex');
+  assert.ok(/למחוק ברגע ש-CAPI עולה/.test(html), 'אזהרת הזמניות קיימת בקוד');
+  assert.ok(!/files\/audio|workbook|\.pdf/.test(html),
+    'קבצי המוצר נשארים ב-start.html בלבד');
 });
 
 test('4. רענון הדף לא מייצר Purchase (אין קוד כזה בדף)', () => {

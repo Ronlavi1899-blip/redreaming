@@ -21,6 +21,19 @@ document.querySelectorAll("[data-checkout]").forEach((el) => {
       return;
     }
     if (window.fbq) fbq("track", "InitiateCheckout", { value: 247, currency: "ILS" });
+
+    // אסימון צ'קאאוט: ההוכחה היחידה שדף התודה יקבל לכך שהגולש
+    // באמת יצא לתשלום. בלעדיו כל פתיחה של /thank-you נספרת כרכישה.
+    // ה-id נוצר כאן ולא שם, כדי שרענון של דף התודה לא ייצר מזהה חדש.
+    try {
+      localStorage.setItem(
+        "mb_checkout",
+        JSON.stringify({
+          t: Date.now(),
+          id: "web-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10),
+        })
+      );
+    } catch (e) {}
   });
 });
 
