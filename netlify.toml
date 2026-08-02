@@ -1,0 +1,16 @@
+[build]
+  publish = "."
+  command = ""
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# הפונקציה מגדירה בעצמה path = "/api/payplus-callback".
+# ה-redirect הוא רשת ביטחון: אם זיהוי v2 לא נתפס בבנייה,
+# הכתובת עדיין תעבוד ולא נגלה את זה רק כשעסקה תיפול.
+[[redirects]]
+  from = "/api/payplus-callback"
+  to = "/.netlify/functions/payplus-callback"
+  status = 200
+  force = false

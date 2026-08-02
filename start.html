@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ברוך הבא - מסיוט לחלום</title>
   <meta name="theme-color" content="#101425" />
+  <!-- דף מסירה: אסור שיגיע לגוגל. תנועה אורגנית לכאן = מוצר חינם
+       + רכישות מזויפות שמרעילות את הפיקסל. -->
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101425'/%3E%3Ctext x='16' y='24' font-size='20' text-anchor='middle' fill='%23b7a9ff'%3E%E2%97%8C%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,18 +24,19 @@
   fbq('init', '4064369010530258');
   fbq('track', 'PageView');
 
-  // ═══ Purchase יורה פעם אחת לכל רכישה ═══
-  // הדף מיועד לשמירה במועדפים - בלי המנעול הזה כל חזרה של קונה
-  // נספרת כמכירה נוספת ומרעילה את האופטימיזציה של הקמפיין.
-  (function () {
-    var qs  = window.location.search || '';
-    var key = 'ltas_purchase' + (qs ? '_' + qs : '');
-    var fired;
-    try { fired = window.localStorage.getItem(key); } catch (e) { fired = null; }
-    if (fired) return;
-    fbq('track', 'Purchase', {value: 247.00, currency: 'ILS'}, {eventID: key});
-    try { window.localStorage.setItem(key, '1'); } catch (e) {}
-  })();
+  // ═══ אין כאן Purchase. בכוונה. ═══
+  //
+  // הדף הזה הוא דף מסירה, לא הוכחת תשלום. כל מי שמקבל את הקישור
+  // בוואטסאפ יכול לפתוח אותו, וכל ירי Purchase מכאן הוא המצאה:
+  // טעינת דף, localStorage, query string לא מאומת או מזהה אקראי -
+  // אף אחד מהם לא מוכיח שעברה עסקה.
+  //
+  // Purchase נשלח *רק* מהשרת, אחרי ש-PayPlus שולחת callback חתום
+  // ואנחנו מאמתים חתימת HMAC + status_code + transaction_type.
+  // ראה: netlify/functions/payplus-callback.js
+  //
+  // ה-event_id שם הוא מזהה העסקה האמיתי של PayPlus, כך שאם בעתיד
+  // יתווסף Pixel Purchase בדפדפן - הוא חייב להשתמש באותו מזהה בדיוק.
 </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=4064369010530258&ev=PageView&noscript=1"/></noscript>

@@ -1,2 +1,5 @@
 /files/*
   X-Robots-Tag: noindex, nofollow
+
+/start.html
+  X-Robots-Tag: noindex, nofollow

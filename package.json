@@ -1,0 +1,13 @@
+{
+  "name": "redreaming",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "מסיוט לחלום - אתר ההשקה ומעקב רכישות מאומת",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^10.7.11"
+  }
+}
