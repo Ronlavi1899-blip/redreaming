@@ -3,3 +3,6 @@
 
 /start.html
   X-Robots-Tag: noindex, nofollow
+
+/thank-you.html
+  X-Robots-Tag: noindex, nofollow

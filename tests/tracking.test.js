@@ -151,6 +151,34 @@ test('3ג. חתימה שגויה נדחית', async () => {
 
 /* ── 4. רענון start.html לא שולח Purchase נוסף ── */
 
+/* ── דף התודה הזמני: Purchase מהדפדפן עד ש-CAPI עולה ── */
+
+test('3ד. thank-you.html יורה Purchase אחד, עם 247/ILS ומזהה ייחודי', () => {
+  const html = readFileSync(join(ROOT, 'thank-you.html'), 'utf8');
+
+  assert.ok(/fbq\('track', 'Purchase'/.test(html), 'Purchase קיים');
+  assert.ok(/value: 247\.00/.test(html) && /currency: 'ILS'/.test(html), '247 ו-ILS');
+  assert.ok(/name="robots"\s+content="noindex/.test(html), 'noindex');
+
+  // המנעול מונע ירי חוזר, והמזהה חייב להיות אקראי ולא קבוע
+  assert.ok(/localStorage\.getItem\(LOCK\)/.test(html), 'מנעול נגד ירי חוזר');
+  assert.ok(/Math\.random\(\)/.test(html), 'eventID אקראי - מזהה קבוע היה מאחד קונים');
+  assert.ok(/eventID: eventId/.test(html), 'eventID מועבר למטא');
+
+  // תזכורת למחיקה כשה-CAPI יעלה - אחרת ספירה כפולה
+  assert.ok(/למחוק ברגע ש-CAPI עולה/.test(html), 'אזהרת הזמניות קיימת בקוד');
+
+  // הדף לא מכיל את המוצר - זה מה שמוריד את סיכון השיתוף
+  assert.ok(!/files\/audio|workbook|\.pdf/.test(html),
+    'קבצי המוצר נשארים ב-start.html בלבד');
+});
+
+test('3ה. הגעה מדף פנימי לא יורה Purchase', () => {
+  const html = readFileSync(join(ROOT, 'thank-you.html'), 'utf8');
+  assert.ok(/document\.referrer/.test(html) && /=== window\.location\.origin\) return/.test(html),
+    'referrer מאותו origin חוסם את הירי');
+});
+
 test('4. רענון הדף לא מייצר Purchase (אין קוד כזה בדף)', () => {
   const html = readFileSync(join(ROOT, 'start.html'), 'utf8');
 

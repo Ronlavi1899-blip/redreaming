@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>תודה על הרכישה - מסיוט לחלום</title>
+  <meta name="theme-color" content="#101425" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101425'/%3E%3Ctext x='16' y='24' font-size='20' text-anchor='middle' fill='%23b7a9ff'%3E%E2%97%8C%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ═══ META PIXEL ═══ -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4064369010530258');
+  fbq('track', 'PageView');
+
+  // ═══════════════════════════════════════════════════════════════
+  //  ⚠️  זמני. למחוק ברגע ש-CAPI עולה לאוויר.
+  //
+  //  הדף הזה קיים רק כדי לירות Purchase. הוא לא מכיל את המוצר,
+  //  ולכן אף אחד לא ישמור אותו במועדפים ולא ישתף אותו - מה שמוריד
+  //  משמעותית את הסיכון לרכישות מזויפות. קבצי המוצר יושבים ב-start.html.
+  //
+  //  כשה-META_ACCESS_TOKEN יוגדר ו-netlify/functions/payplus-callback.js
+  //  יתחיל לדווח, חובה למחוק את הבלוק הזה באותו commit. אחרת כל רכישה
+  //  תיספר פעמיים - הדפדפן שולח מזהה אקראי והשרת שולח את מזהה העסקה
+  //  של PayPlus, ומטא לא תזהה שמדובר באותה רכישה.
+  // ═══════════════════════════════════════════════════════════════
+  (function () {
+    // הגעה מדף פנימי באתר אינה חזרה מתשלום.
+    // שים לב שאנחנו *לא* דורשים referrer של PayPlus - הרבה שערי תשלום
+    // מסתירים אותו, וזה היה גורם לנו לפספס רכישות אמיתיות.
+    try {
+      if (document.referrer && new URL(document.referrer).origin === window.location.origin) return;
+    } catch (e) {}
+
+    var LOCK = 'mb_purchase_fired';
+    try { if (window.localStorage.getItem(LOCK)) return; } catch (e) {}
+
+    // מזהה ייחודי לכל ירי. מזהה קבוע היה גורם למטא לאחד
+    // את הרכישות של כל הקונים לאירוע אחד ולמחוק את השאר.
+    var eventId = 'web-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+
+    fbq('track', 'Purchase', {
+      value: 247.00,
+      currency: 'ILS',
+      content_name: 'מסיוט לחלום',
+      content_type: 'product'
+    }, { eventID: eventId });
+
+    try { window.localStorage.setItem(LOCK, '1'); } catch (e) {}
+  })();
+</script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=4064369010530258&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+  <div class="noise"></div>
+
+  <section class="thanks-hero">
+    <div class="doc-wrap">
+      <span class="thanks-ring">◌</span>
+      <h1>תודה. הרכישה הושלמה.</h1>
+      <p>
+        קבלה נשלחה למייל שהזנת. שלחתי לך גם קישור לחומרים, כדי שיישמר אצלך -
+        אם הוא לא הגיע תוך כמה דקות תבדוק בקידומי מכירות ובספאם, ואם גם שם אין, תכתוב לי ואסדר.
+      </p>
+    </div>
+  </section>
+
+  <main class="doc-page" style="padding-top:70px; padding-bottom:90px;">
+    <div class="doc-wrap" style="text-align:center;">
+      <h2 style="border:0; padding:0;">מוכן להתחיל?</h2>
+      <p style="max-width:520px; margin-inline:auto;">
+        הלילה הראשון שלך מתחיל הערב. בעמוד הבא נמצאים כל החומרים -
+        ההקלטות, ספר התרגול ויומן הלילה.
+      </p>
+      <p style="margin-top:32px;">
+        <a class="button button-primary" href="start.html">התחל את תוכנית 21 הלילות</a>
+      </p>
+      <p style="margin-top:28px; font-size:15px; color:#8a8fa3;">
+        כדאי לשמור את העמוד הבא במועדפים - שם נמצאים כל הקבצים.
+      </p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
