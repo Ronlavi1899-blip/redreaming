@@ -1,0 +1,16 @@
+{
+  "name": "מסיוט לחלום",
+  "short_name": "מסיוט לחלום",
+  "description": "21 לילות של עבודה עצמית עם סיוטים חוזרים",
+  "lang": "he",
+  "dir": "rtl",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0a111e",
+  "theme_color": "#0a111e",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

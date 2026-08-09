@@ -1,17 +1,17 @@
 /files/*
   X-Robots-Tag: noindex, nofollow
 
-# Netlify מגיש כל דף בשתי כתובות - עם הסיומת ובלעדיה - וכללי
-# _headers מותאמים לנתיב המבוקש בדיוק. בלי שתי השורות לכל דף,
-# הכתובת ה"יפה" (זו שהקישורים באתר מצביעים אליה) נשארת בלי הכותרת.
 /start
   X-Robots-Tag: noindex, nofollow
 
-/start.html
+/start/*
   X-Robots-Tag: noindex, nofollow
 
 /thank-you
   X-Robots-Tag: noindex, nofollow
 
-/thank-you.html
+/thank-you/*
+  X-Robots-Tag: noindex, nofollow
+
+/navy
   X-Robots-Tag: noindex, nofollow
