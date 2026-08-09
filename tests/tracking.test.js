@@ -191,11 +191,11 @@ const NOW_MS = 1785000000000;
 const token = (age = 0, id = 'web-test-abc123') =>
   ({ mb_checkout: JSON.stringify({ t: NOW_MS - age, id }) });
 
-test('3ד. חזרה מ-PayPlus אחרי צ׳קאאוט → Purchase אחד עם 247/ILS ו-eventID', () => {
+test('3ד. חזרה מ-PayPlus אחרי צ׳קאאוט → Purchase אחד עם 49/ILS ו-eventID', () => {
   const { fired, params, opts } = runThankYou({ referrer: PAYPLUS, storage: token() });
 
   assert.equal(fired.length, 1, 'Purchase נורה בדיוק פעם אחת');
-  assert.equal(params.value, 247.00);
+  assert.equal(params.value, 49.00, 'מחיר הבטא - חייב להתאים ל-PRICE ב-script.js');
   assert.equal(params.currency, 'ILS');
   assert.equal(opts.eventID, 'web-test-abc123', 'eventID מגיע מאסימון הצ׳קאאוט');
 });

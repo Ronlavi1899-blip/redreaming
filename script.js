@@ -4,7 +4,11 @@
    ⚠️  שינוי אחד לפני העלייה לאוויר: השורה הבאה.
    ========================================================= */
 
-const CHECKOUT_URL = "https://payments.payplus.co.il/l/58054a94-4d5e-4e1f-ae5d-a735670a20da";
+const CHECKOUT_URL = "https://payments.payplus.co.il/l/d30803aa-b0d1-49fa-80f0-61b4fe9ebc5e";
+
+/* מחיר הבטא. מופיע גם ב-thank-you.html (Purchase) - שני המקומות
+   חייבים להישאר זהים, אחרת מטא תקבל ערך אחר בצ׳קאאוט וברכישה. */
+const PRICE = 49;
 
 /* ========================================================= */
 
@@ -20,7 +24,7 @@ document.querySelectorAll("[data-checkout]").forEach((el) => {
       alert("יש להחליף ב-script.js את CHECKOUT_URL בקישור התשלום של PayPlus.");
       return;
     }
-    if (window.fbq) fbq("track", "InitiateCheckout", { value: 247, currency: "ILS" });
+    if (window.fbq) fbq("track", "InitiateCheckout", { value: PRICE, currency: "ILS" });
 
     // אסימון צ'קאאוט: ההוכחה היחידה שדף התודה יקבל לכך שהגולש
     // באמת יצא לתשלום. בלעדיו כל פתיחה של /thank-you נספרת כרכישה.
@@ -93,6 +97,46 @@ document.querySelectorAll(".faq-item").forEach((item) => {
     faqOpens += 1;
     if (faqOpens === 3 && window.fbq) fbq("trackCustom", "FaqEngaged");
   });
+});
+
+/* ── הגיע לכרטיס המחיר: השלב שהיה חסר במשפך ──
+   עד עכשיו ידענו רק כמה נכנסו וכמה לחצו לתשלום, בלי שום
+   מדידה של מי בכלל הגיע לראות את המחיר. ViewContent סוגר את
+   הפער, והוא גם אירוע סטנדרטי שמטא יודעת לבצע עליו
+   אופטימיזציה - בניגוד לאירוע מותאם.                    */
+const priceSection = document.getElementById("price");
+if (priceSection && "IntersectionObserver" in window) {
+  const priceIO = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        priceIO.disconnect();
+        if (window.fbq) fbq("track", "ViewContent", { content_name: "price", value: PRICE, currency: "ILS" });
+      });
+    },
+    { threshold: 0.4 }
+  );
+  priceIO.observe(priceSection);
+}
+
+/* ── וידאו המוצר: טעינה רק כשמגיעים אליו ──
+   הקובץ שוקל 3.67MB. עם autoplay הדפדפן הוריד אותו כבר
+   בטעינת הדף, הרבה לפני שמישהו גלל עד אליו.            */
+document.querySelectorAll("video[data-lazyvideo]").forEach((video) => {
+  if (!("IntersectionObserver" in window)) { video.play().catch(() => {}); return; }
+  const vio = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        vio.disconnect();
+        video.preload = "auto";
+        video.load();
+        video.play().catch(() => {}); // דפדפן שחוסם ניגון אוטומטי נשאר עם ה-poster
+      });
+    },
+    { rootMargin: "200px" }
+  );
+  vio.observe(video);
 });
 
 /* ── נגן ההצצה בהירו ── */

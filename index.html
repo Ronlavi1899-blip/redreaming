@@ -6,7 +6,7 @@
   <title>מסיוט לחלום | 21 לילות של עבודה עצמית עם סיוטים חוזרים</title>
   <meta name="description" content="מסיוט לחלום. 21 לילות של תרגול יומי לשבירת הדפוס של הסיוט החוזר - שיטה מבוססת מחקר, בעברית, לעבודה עצמית. מאת רון לביא." />
   <meta property="og:title" content="מסיוט לחלום" />
-  <meta property="og:description" content="אף אחד לא מספר על החלומות שהוא חולם אחרי הצבא. 21 לילות. מסיוט לחלום." />
+  <meta property="og:description" content="אף אחד לא מספר על החלומות שהוא חולם. 21 לילות. מסיוט לחלום." />
   <meta property="og:type" content="website" />
   <!-- להעלות את "מודעה A - ריבוע 1x1.png" לשורש האתר בשם og.png -->
   <meta property="og:image" content="og.png" />
@@ -15,7 +15,11 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101425'/%3E%3Ctext x='16' y='24' font-size='20' text-anchor='middle' fill='%23b7a9ff'%3E%E2%97%8C%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Frank Ruhl 600 הוסר: נטען ולא היה בשימוש באף כלל CSS.
+       הגיליון נטען לא־חוסם כדי שהטקסט יופיע לפני הגופנים. -->
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@400;500&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@400;500&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="style.css" />
   <link rel="preload" as="image" href="mockups/wb-cover.png" fetchpriority="high" />
 
@@ -53,19 +57,34 @@
       <div class="orb orb-two"></div>
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <div class="eyebrow">תוכנית לעבודה עצמית ללוחמים משוחררים שחיים עם סיוטים</div>
-          <h1>21 לילות.<br><span>מסיוט לחלום.</span></h1>
+          <div class="eyebrow">תוכנית לעבודה עצמית למי שחי עם סיוט שחוזר</div>
+          <h1>אתה מפחד ללכת לישון<br>בגלל אותו <span>סיוט שחוזר.</span></h1>
           <p class="hero-lead">
-            21 יום זה בדיוק הזמן הדרוש כדי לשבור דפוס של סיוט שחוזר.
-            כל ערב, 10 דקות של תרגול.<br>
-            <a class="lead-link" href="#science">שיטה מגובה מחקרית</a> -
+            בעוד 21 לילות תהיה לך שיטה מסודרת לעבוד עם הסיוט -
+            במקום לקוות בכל ערב שהלילה הוא לא יגיע.
+            עשר דקות בערב, לבד, בבית.<br>
+            <a class="lead-link" href="#science">פרוטוקול מבוסס מחקר</a> -
             לראשונה בעברית, עם הדרכה לעבודה עצמית.
           </p>
+
+          <!-- רשימת הסימפטומים: הזיהוי קורה בעשר השניות הראשונות,
+               לא אחרי שני סקשנים של גלילה. -->
+          <div class="micro-proof" aria-label="מה שמוכר לך">
+            <span>דוחה את השינה</span>
+            <span>מתעורר עם הלב בחוץ</span>
+            <span>לא מצליח לחזור לישון</span>
+            <span>לא מספר על זה לאף אחד</span>
+            <span>מקווה שזה יעבור לבד</span>
+          </div>
+
+          <!-- ⚠️ הכפתור הזה גולל לכרטיס המחיר ולא קופץ ל-PayPlus.
+               גרסה קודמת שלחה מבקר קר ישר לטופס אשראי
+               בלי שהמחיר הוזכר על הדף אפילו פעם אחת. -->
           <div class="hero-actions">
-            <a class="button button-primary checkout-link" href="#" data-checkout>אני רוצה להתחיל</a>
+            <a class="button button-primary" href="#price">להתחיל את 21 הלילות</a>
             <a class="button button-ghost" href="#about">הסיפור שלי עם סיוטים</a>
           </div>
-          <p class="cta-assure">7 ימים להתחרט. החזר מלא. גישה מיידית.</p>
+          <p class="cta-assure">49 ₪ במקום 247 · 5 מקומות בלבד · גישה מיידית · 7 ימים להתחרט</p>
         </div>
 
         <div class="hero-visual reveal delay-1">
@@ -248,6 +267,14 @@
             יחד עם הפרוטוקול. הפרוטוקול נותן את המבנה - ומה שעבד עליי,
             ועל אנשים שליוויתי אחריי, מוסיף את מה שאין בו.
           </p>
+          <!-- גשר: הסיפור נשאר צבאי כי זו האמינות, אבל בלי המשפט הזה
+               קורא אזרחי מסיק מהסקשן הזה שהתוכנית לא מיועדת לו. -->
+          <p>
+            הסיפור שלי מתחיל בצבא, אבל <strong>השיטה לא שואלת מאיפה הסיוט הגיע.</strong>
+            היא לא עובדת על האירוע שעברת - היא עובדת על החלום שחוזר.
+            וזה נכון בדיוק באותה מידה אם הסיוט שלך בא ממקום אחר לגמרי,
+            או משום מקום שאתה מצליח להצביע עליו.
+          </p>
         </div>
       </div>
     </section>
@@ -300,8 +327,8 @@
     <div class="cta-band reveal">
       <div class="container centered">
         <p>זו השיטה. עכשיו צריך רק להתחיל אותה.</p>
-        <a class="button button-primary checkout-link" href="#" data-checkout>אני רוצה להתחיל</a>
-        <span class="cta-assure">247 ₪ · תשלום חד־פעמי · 7 ימים להתחרט</span>
+        <a class="button button-primary" href="#price">להתחיל את 21 הלילות</a>
+        <span class="cta-assure">49 ₪ במקום 247 · 5 מקומות בלבד · גישה מיידית · 7 ימים להתחרט</span>
       </div>
     </div>
 
@@ -364,8 +391,8 @@
     <div class="cta-band reveal">
       <div class="container centered">
         <p>מהלילה הראשון יש לך מה לעשות עם זה.</p>
-        <a class="button button-primary checkout-link" href="#" data-checkout>אני רוצה להתחיל</a>
-        <span class="cta-assure">247 ₪ · תשלום חד־פעמי · 7 ימים להתחרט</span>
+        <a class="button button-primary" href="#price">להתחיל את 21 הלילות</a>
+        <span class="cta-assure">49 ₪ במקום 247 · 5 מקומות בלבד · גישה מיידית · 7 ימים להתחרט</span>
       </div>
     </div>
 
@@ -376,7 +403,10 @@
           <div class="section-kicker">מה מקבלים</div>
           <h2>כל מה שצריך כדי להפוך<br>ידע להרגל.</h2>
           <figure class="product-shot reveal">
-            <video autoplay muted loop playsinline preload="metadata"
+            <!-- premium.mp4 שוקל 3.67MB. autoplay הכריח את הדפדפן להוריד
+                 אותו כבר בטעינת הדף, למרות שהוא הרבה מתחת לקיפול.
+                 preload="none" + הפעלה בגלילה (script.js) דוחים את זה. -->
+            <video muted loop playsinline preload="none" data-lazyvideo
                    poster="mockups/product-poster.jpg"
                    aria-label="ספר התרגול, היומן והאוזניות על שידה ליד המיטה">
               <source src="mockups/premium.mp4" type="video/mp4">
@@ -460,8 +490,8 @@
           <div class="section-kicker">למי זה מתאים</div>
           <ul>
             <li>יש לך סיוט שחוזר, או כמה כאלה, ואתה מתפקד ביום־יום.</li>
-            <li>השתחררת מהצבא, ויש בך תחושה שלא נתת לה מספיק מקום.</li>
-            <li>או שבכלל לא היית בצבא - עברת משהו אחר, והסיוטים נשארו.</li>
+            <li>עברת תקופה או אירוע שלא נתת להם מספיק מקום - והסיוטים נשארו.</li>
+            <li>או שאין לך בכלל הסבר לסיוט, והוא פשוט חוזר.</li>
             <li>אתה מוכן לתת לזה עשר דקות בערב, 21 ערבים.</li>
             <li>נמאס לך לשמוע ״זה סתם חלום״.</li>
             <li>אתה בטיפול ורוצה עוד כלי, בתיאום עם המטפל שלך.</li>
@@ -483,8 +513,8 @@
     <div class="cta-band reveal">
       <div class="container centered">
         <p>אותו חלום. סוף אחר.</p>
-        <a class="button button-primary checkout-link" href="#" data-checkout>אני רוצה להתחיל</a>
-        <span class="cta-assure">247 ₪ · תשלום חד־פעמי · 7 ימים להתחרט</span>
+        <a class="button button-primary" href="#price">להתחיל את 21 הלילות</a>
+        <span class="cta-assure">49 ₪ במקום 247 · 5 מקומות בלבד · גישה מיידית · 7 ימים להתחרט</span>
       </div>
     </div>
 
@@ -492,12 +522,14 @@
     <section id="price" class="section price-section">
       <div class="container price-wrap solo">
         <div class="price-card reveal delay-1">
-          <span class="price-label">תשלום חד־פעמי</span>
-          <div class="price"><span>247</span> ₪</div>
+          <span class="price-label">מחיר השקה · 5 מקומות בלבד</span>
+          <div class="price"><span>49</span> ₪</div>
+          <p class="price-was">במקום <s>247 ₪</s> · תשלום חד־פעמי</p>
           <p>משלמים פעם אחת. מקורות המידע נשארים אצלך תמיד.</p>
           <div class="price-anchor">
-            פגישת טיפול אחת בארץ עולה בין 350 ל־500 ₪.
-            <strong>התוכנית כולה עולה פחות ממחצית מזה.</strong>
+            אני פותח חמישה מקומות במחיר הזה, ובתמורה אבקש מכל אחד
+            <strong>שיחת משוב קצרה אחרי שיתחיל.</strong>
+            אחרי חמישה - המחיר חוזר ל־247 ₪.
           </div>
 
           <ul class="price-includes">
@@ -507,14 +539,18 @@
             <li>גישה לידע שלי לכל החיים</li>
           </ul>
 
-          <!-- ═══ הקישור מוגדר ב-script.js - שורה אחת בראש הקובץ ═══ -->
+          <!-- ═══ הקישור מוגדר ב-script.js - שורה אחת בראש הקובץ ═══
+               זו הדלת היחידה ל-PayPlus בכל האתר. כל שאר הכפתורים
+               גוללים לכאן, כדי שאף אחד לא יגיע לטופס אשראי לפני
+               שראה מחיר, אחריות ותכולה. גם InitiateCheckout נהיה
+               בזכות זה סיגנל נקי. ═══ -->
           <a class="button button-primary button-full checkout-link" href="#" data-checkout>
-            אני רוצה להתחיל
+            להתחיל את 21 הלילות
           </a>
           <div class="trust-row">
             <span>תשלום מאובטח · תקן PCI DSS</span>
             <span>סליקה דרך PayPlus</span>
-            <span>חשבונית מס אוטומטית</span>
+            <span>קבלה אוטומטית במייל</span>
           </div>
           <!-- ═══ אחרי שתאשר אילו אמצעי תשלום פעילים ב-PayPlus,
                להוסיף כאן שורת לוגואים: ויזה · מאסטרקארד · ישראכרט · ביט ═══ -->
@@ -537,12 +573,38 @@
 
         <div class="faq-list">
           <details class="faq-item reveal">
+            <summary>ומה אם אצלי זה פשוט לא יעבוד?</summary>
+            <p>גם אני הייתי בטוח שאין מה לעשות עם הסיוטים, ושזה פשוט משהו שצריך לחיות איתו. אני לא יכול להבטיח לך תוצאה - אף אחד לא יכול, וכל מי שמבטיח לך מוכר לך משהו אחר. מה שאני כן יכול להגיד: זה פרוטוקול שנבדק במחקר מבוקר, ובמחקרים הטווח שחוזר הוא ירידה של 50 עד 70 אחוז אצל מי שמתמיד. ואם אחרי שבעה ימים אתה מרגיש שזה לא בשבילך - אתה מקבל את הכסף בחזרה, בלי לנמק.</p>
+          </details>
+          <details class="faq-item reveal">
             <summary>ומה אם הסיוט חוזר אצלי כבר שנים?</summary>
-            <p>״דווקא״ כן. השיטה מיועדת בדיוק לאנשים שהסיוטים חוזרים אצלם - זה רק מעיד שזה כבר דפוס, ולא מנגנון עיבוד. במקרים מורכבים עדיף לשלב ליווי מקצועי.</p>
+            <p>דווקא כן. השיטה מיועדת בדיוק לאנשים שהסיוטים חוזרים אצלם - זה רק מעיד שזה כבר דפוס, ולא מנגנון עיבוד. במקרים מורכבים עדיף לשלב ליווי מקצועי.</p>
           </details>
           <details class="faq-item reveal">
             <summary>אני אצטרך לספר מה עברתי?</summary>
             <p>לא. לא חוזרים לאירוע, לא מספרים מה קרה ולא נוברים בעבר. עובדים על החלום שחוזר עכשיו - ומייצרים הרגל חדש.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>אני כמעט לא זוכר את החלומות שלי</summary>
+            <p>מספיק שאתה זוכר את הסיוט שחוזר - ואת זה רוב האנשים זוכרים, כי הוא זה שמעיר אותם. אתה לא צריך לזכור כל לילה, ולא צריך זיכרון מלא. הלילות הראשונים בספר עוסקים בדיוק בזה: איך לתפוס את מה שכן נשאר, גם אם זה רק תמונה אחת או תחושה.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>אין לי כוח לעוד משימה יומית</summary>
+            <p>עשר דקות בערב, ואתה עושה את זה בזמן שבין כה וכה אתה במיטה ולא נרדם. אין שיעורי בית, אין קבוצה, אין מפגשים בזום ואין מישהו שבודק אם עשית. אם פספסת לילה - ממשיכים מהמקום שעצרת, לא מתחילים מהתחלה.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>לא הייתי בקרבות. זה בכלל בשבילי?</summary>
+            <p>כן. זה המשפט שאני שומע הכי הרבה, וגם הסיוטים שלי לא היו פלאשבקים מלחימה - הם היו תסכול, חוסר תפקוד ותחושת פספוס. השיטה לא עובדת על האירוע שעברת, היא עובדת על החלום שחוזר. וזה עובד גם אם מעולם לא היית בצבא.</p>
+          </details>
+          <!-- המקבילה האזרחית לשאלה שמעליה. בלעדיה מי שלא שירת קורא
+               את סעיף ה"לא הייתי בקרבות" ומבין שהדף מדבר אל מישהו אחר. -->
+          <details class="faq-item reveal">
+            <summary>לא עברתי שום דבר דרמטי. אז למה יש לי סיוטים?</summary>
+            <p>לא לכל סיוט חוזר יש אירוע אחד שאפשר להצביע עליו. לפעמים זה לחץ מתמשך, תקופה שלא עיכלת, אובדן, או שום דבר שאתה מצליח לחבר אליו. לתרגול זה לא משנה: השיטה לא מחפשת את הסיבה, היא עובדת על החלום עצמו - ולכן היא לא דורשת ממך לדעת מאיפה הוא הגיע.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>מה בדיוק מקבלים, ואיך זה מגיע אליי?</summary>
+            <p>מיד אחרי התשלום נפתח לך דף עם כל החומרים: ספר התרגול (65 עמודים, בגרסת זכר ובגרסת נקבה), ההדרכות הקוליות, יומן המעקב וכרטיס השכתוב להדפסה. הכל דיגיטלי, הכל אצלך לתמיד, ואפשר להתחיל כבר הערב.</p>
           </details>
         </div>
       </div>
@@ -588,8 +650,8 @@
   </footer>
 
   <div class="mobile-cta">
-    <div><strong>247 ₪</strong><span>גישה לכל החיים</span></div>
-    <a class="button button-primary checkout-link" href="#" data-checkout>להתחיל</a>
+    <div><strong>49 ₪</strong><span>5 מקומות בלבד</span></div>
+    <a class="button button-primary" href="#price">להתחיל</a>
   </div>
 
   <audio id="heroClip" preload="none" src="files/audio/05.mp3#t=3.5,23.5"></audio>
